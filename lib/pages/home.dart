@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:water_intake/data/water_data.dart';
+import 'package:water_intake/model/water_mode.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +15,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final amountController = TextEditingController();
+
+  void saveWater() async {
+    Provider.of<WaterData>(context, listen: false).addWater(WaterModel(
+        amount: double.parse(amountController.text.toString()),
+        dateTime: DateTime.now(),
+        unit: 'ml'));
+
+    if (!context.mounted) {
+      return; // if the widget is not mounted, don't do anthing
+    }
+  }
 
   void addWater() {
     showDialog(
@@ -45,7 +57,8 @@ class _HomePageState extends State<HomePage> {
                 TextButton(
                     onPressed: () {
                       //save data to db
-                      //saveWater(amountController.text);
+                      saveWater();
+                      Navigator.of(context).pop();
                     },
                     child: Text('Save')),
               ],
