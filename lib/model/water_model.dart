@@ -11,10 +11,11 @@ class WaterModel {
 
   factory WaterModel.fromJson(Map<String, dynamic> json, String id) {
     return WaterModel(
-        id: id,
-        amount: json['amount'],
-        dateTime: DateTime.parse(json['dateTime']),
-        unit: json['unit']);
+      id: id,
+      amount: json['amount'],
+      dateTime: DateTime.parse(json['dateTime']),
+      unit: json['unit'],
+    );
   }
 
   // convert watermode to JSON, for sending data to firebase
@@ -23,5 +24,11 @@ class WaterModel {
       'amount': amount,
       'dateTime': DateTime.now(),
     };
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "Water: $amount, ${dateTime.toIso8601String()}, $id";
   }
 }
