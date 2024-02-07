@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/model/water_mode.dart';
@@ -15,6 +12,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final amountController = TextEditingController();
+  var _isLoading = true;
+
+  @override
+  void initState() {
+    Provider.of<WaterData>(context, listen: false).getWater();
+    super.initState();
+  }
 
   void saveWater() async {
     Provider.of<WaterData>(context, listen: false).addWater(WaterModel(
@@ -67,17 +71,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("Rebuilding Build ...");
     return Consumer<WaterData>(
       builder: (context, value, child) => Scaffold(
         appBar: AppBar(
           elevation: 4,
           centerTitle: true,
-          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.map))],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  // saveWater();
+                },
+                icon: const Icon(Icons.map))
+          ],
           title: const Text('Water'),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
         floatingActionButton: FloatingActionButton(
             onPressed: addWater, child: const Icon(Icons.add)),
+        body: ListView.builder(
+            itemCount: value.waterDataList.length,
+            itemBuilder: (context, index) {
+              final waterModel = value.waterDataList[index];
+
+              return ListTile(
+                title: Text(waterModel.amount.toString()),
+                subtitle: Text(waterModel.id!),
+              );
+            }),
       ),
     );
   }

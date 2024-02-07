@@ -20,6 +20,17 @@ class WaterData extends ChangeNotifier {
           'dateTime': DateTime.now().toString()
         }));
 
+    if (response.statusCode == 200) {
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      waterDataList.add(WaterModel(
+          id: extractedData['name'],
+          amount: water.amount,
+          dateTime: water.dateTime,
+          unit: 'ml'));
+    } else {
+      print('Error: ${response.statusCode}');
+    }
+
     notifyListeners();
   }
 
@@ -29,13 +40,16 @@ class WaterData extends ChangeNotifier {
 
     final response = await http.get(url);
     if (response.statusCode == 200 && response.body != 'null') {
-      // we are good to go
+      // Clear the existing data before adding new data
+      waterDataList.clear();
+
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       for (var element in extractedData.entries) {
         waterDataList.add(WaterModel(
-            amount: element.value['amount'],
-            dateTime: DateTime.parse(element.value['dateTime']),
-            unit: element.value['unit']));
+          amount: element.value['amount'],
+          dateTime: DateTime.parse(element.value['dateTime']),
+          unit: element.value['unit'],
+        ));
       }
     }
     notifyListeners();
