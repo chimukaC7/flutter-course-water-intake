@@ -4,6 +4,8 @@ import 'package:water_intake/components/water_intake_summary.dart';
 import 'package:water_intake/components/water_tile.dart';
 import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/model/water_model.dart';
+import 'package:water_intake/pages/about_screen.dart';
+import 'package:water_intake/pages/settings_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -158,11 +160,21 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 title: const Text('Settings'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsScreen()));
+                },
               ),
               ListTile(
                 title: const Text('About'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutScreen()));
+                },
               ),
             ],
           ),
