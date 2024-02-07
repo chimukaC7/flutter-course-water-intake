@@ -80,14 +80,14 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('Cancel')),
+                    child: const Text('Cancel')),
                 TextButton(
                     onPressed: () {
                       //save data to db
                       saveWater();
                       Navigator.of(context).pop();
                     },
-                    child: Text('Save')),
+                    child: const Text('Save')),
               ],
             ));
   }
@@ -96,51 +96,78 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer<WaterData>(
       builder: (context, value, child) => Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    // saveWater();
-                  },
-                  icon: const Icon(Icons.map))
-            ],
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Weekly: ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text('${value.calculateWeeklyWaterIntake(value)} ml',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-          backgroundColor: Theme.of(context).colorScheme.background,
-          floatingActionButton: FloatingActionButton(
-              onPressed: addWater, child: const Icon(Icons.add)),
-          body: ListView(
+        appBar: AppBar(
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  // saveWater();
+                },
+                icon: const Icon(Icons.map))
+          ],
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              WaterSummary(startofWeek: value.getStartOfWeek()),
-              !_isLoading
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: value.waterDataList.length,
-                      itemBuilder: (context, index) {
-                        final waterModel = value.waterDataList[index];
-
-                        return WaterTile(waterModel: waterModel);
-                      })
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+              Text(
+                'Weekly: ',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text('${value.calculateWeeklyWaterIntake(value)} ml',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.bold)),
             ],
-          )),
+          ),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        floatingActionButton: FloatingActionButton(
+            onPressed: addWater, child: const Icon(Icons.add)),
+        body: ListView(
+          children: [
+            WaterSummary(startofWeek: value.getStartOfWeek()),
+            !_isLoading
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: value.waterDataList.length,
+                    itemBuilder: (context, index) {
+                      final waterModel = value.waterDataList[index];
+
+                      return WaterTile(waterModel: waterModel);
+                    })
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+          ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Text(
+                  'Water Intake',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                ),
+              ),
+              ListTile(
+                title: const Text('Settings'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('About'),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
