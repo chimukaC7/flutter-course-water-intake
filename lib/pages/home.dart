@@ -97,7 +97,6 @@ class _HomePageState extends State<HomePage> {
     return Consumer<WaterData>(
       builder: (context, value, child) => Scaffold(
           appBar: AppBar(
-            elevation: 4,
             centerTitle: true,
             actions: [
               IconButton(

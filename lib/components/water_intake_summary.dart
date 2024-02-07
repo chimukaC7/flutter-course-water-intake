@@ -15,13 +15,13 @@ class WaterSummary extends StatelessWidget {
         height: 200,
         child: BarGraph(
             maxY: 100,
-            sunWaterAmt: 0,
+            sunWaterAmt: 50,
             monWaterAmt: 34,
-            tueWaterAmt: 0,
-            wedWaterAmt: 9,
+            tueWaterAmt: 30,
+            wedWaterAmt: 19,
             thurWaterAmt: 72,
-            friWaterAmt: 7,
-            satWaterAmt: 46),
+            friWaterAmt: 71,
+            satWaterAmt: 56),
       ),
     );
   }
