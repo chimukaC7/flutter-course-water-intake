@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:water_intake/components/water_intake_summary.dart';
 import 'package:water_intake/components/water_tile.dart';
 import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/model/water_model.dart';
@@ -93,36 +94,41 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Rebuilding Build ...");
     return Consumer<WaterData>(
       builder: (context, value, child) => Scaffold(
-        appBar: AppBar(
-          elevation: 4,
-          centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  // saveWater();
-                },
-                icon: const Icon(Icons.map))
-          ],
-          title: const Text('Water'),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        floatingActionButton: FloatingActionButton(
-            onPressed: addWater, child: const Icon(Icons.add)),
-        body: !_isLoading
-            ? ListView.builder(
-                itemCount: value.waterDataList.length,
-                itemBuilder: (context, index) {
-                  final waterModel = value.waterDataList[index];
+          appBar: AppBar(
+            elevation: 4,
+            centerTitle: true,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    // saveWater();
+                  },
+                  icon: const Icon(Icons.map))
+            ],
+            title: const Text('Water'),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.background,
+          floatingActionButton: FloatingActionButton(
+              onPressed: addWater, child: const Icon(Icons.add)),
+          body: ListView(
+            children: [
+              WaterSummary(startofWeek: value.getStartOfWeek()),
+              !_isLoading
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: value.waterDataList.length,
+                      itemBuilder: (context, index) {
+                        final waterModel = value.waterDataList[index];
 
-                  return WaterTile(waterModel: waterModel);
-                })
-            : const Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
+                        return WaterTile(waterModel: waterModel);
+                      })
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+            ],
+          )),
     );
   }
 

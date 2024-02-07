@@ -57,6 +57,43 @@ class WaterData extends ChangeNotifier {
     return waterDataList;
   }
 
+  // get weekday from a dateTime object
+  String getWeekday(DateTime dateTime) {
+    switch (dateTime.weekday) {
+      case 1:
+        return 'Mon';
+      case 2:
+        return 'Tues';
+      case 3:
+        return 'Wed';
+      case 4:
+        return 'Thur';
+      case 5:
+        return 'Fri';
+      case 6:
+        return 'Sat';
+      case 7:
+        return 'Sun';
+
+      default:
+        return '';
+    }
+  }
+
+  DateTime getStartOfWeek() {
+    DateTime? startOfWeek;
+
+    //get the current date
+    DateTime dateTime = DateTime.now();
+
+    for (int i = 0; i < 7; i++) {
+      if (getWeekday(dateTime.subtract(Duration(days: i))) == 'Sun') {
+        startOfWeek = dateTime.subtract(Duration(days: i));
+      }
+    }
+    return startOfWeek!;
+  }
+
   void delete(WaterModel waterModel) {
     final url = Uri.https('water-intaker-default-rtdb.firebaseio.com',
         'water/${waterModel.id}.json');

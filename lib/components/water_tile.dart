@@ -32,7 +32,7 @@ class WaterTile extends StatelessWidget {
         subtitle:
             Text('${waterModel.dateTime.day}/${waterModel.dateTime.month}'),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: () {
             Provider.of<WaterData>(context, listen: false).delete(waterModel);
           },
