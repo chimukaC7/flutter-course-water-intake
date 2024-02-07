@@ -118,7 +118,7 @@ class WaterData extends ChangeNotifier {
   }
 
   // calculate the daily water intake
-  Map<String, double> calculaterDailyWaterSummary() {
+  Map<String, double> calculateDailyWaterSummary() {
     Map<String, double> dailyWaterSummary = {};
 
     // loop through the water data list
