@@ -105,7 +105,20 @@ class _HomePageState extends State<HomePage> {
                   },
                   icon: const Icon(Icons.map))
             ],
-            title: const Text('Water'),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Weekly: ',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                Text('${value.calculateWeeklyWaterIntake(value)} ml',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontWeight: FontWeight.bold)),
+              ],
+            ),
           ),
           backgroundColor: Theme.of(context).colorScheme.background,
           floatingActionButton: FloatingActionButton(
