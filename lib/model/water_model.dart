@@ -3,11 +3,12 @@ class WaterModel {
   final double amount;
   final DateTime dateTime;
 
-  WaterModel(
-      {this.id,
-      required this.amount,
-      required this.dateTime,
-      required String unit});
+  WaterModel({
+    this.id,
+    required this.amount,
+    required this.dateTime,
+    required String unit
+  });
 
   factory WaterModel.fromJson(Map<String, dynamic> json, String id) {
     return WaterModel(
@@ -18,7 +19,7 @@ class WaterModel {
     );
   }
 
-  // convert watermode to JSON, for sending data to firebase
+  // convert water model to JSON, for sending data to firebase
   Map<String, dynamic> toJson() {
     return {
       'amount': amount,

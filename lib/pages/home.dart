@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // final amountController = TextEditingController(text: "hello");
   final amountController = TextEditingController();
 
   bool _isLoading = true;
@@ -50,12 +51,13 @@ class _HomePageState extends State<HomePage> {
         unit: 'ml'));
 
     if (!context.mounted) {
-      return; // if the widget is not mounted, don't do anthing
+      return; // if the widget is not mounted, don't do anything
     }
 
     clearWater();
   }
 
+  //invoke the dialog
   void addWater() {
     showDialog(
         context: context,
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               title: const Text('Add Water'),
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min,//take enough space to accommodate what is inside
                 children: [
                   const Text('Add water to your daily intake'),
                   const SizedBox(
@@ -73,7 +75,9 @@ class _HomePageState extends State<HomePage> {
                     controller: amountController,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Amount'),
+                        border: OutlineInputBorder(),
+                        labelText: 'Amount')
+                    ,
                   )
                 ],
               ),

@@ -10,8 +10,7 @@ class WaterData extends ChangeNotifier {
 
   // add water
   void addWater(WaterModel water) async {
-    final url =
-        Uri.https('water-intaker-default-rtdb.firebaseio.com', 'water.json');
+    final url = Uri.https('water-intaker-default-rtdb.firebaseio.com', 'water.json');
 
     var response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
@@ -22,14 +21,18 @@ class WaterData extends ChangeNotifier {
         }));
 
     if (response.statusCode == 200) {
+
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       var model = WaterModel(
           id: extractedData['name'],
           amount: water.amount,
           dateTime: water.dateTime,
           unit: 'ml');
+
       print("Object: $model");
+
       waterDataList.add(model);
+
     } else {
       print('Error: ${response.statusCode}');
     }
@@ -46,8 +49,8 @@ class WaterData extends ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       for (var element in extractedData.entries) {
         waterDataList.add(WaterModel(
-          id: element
-              .key, // must add this so we can delete the item, but also be able to show the id
+          id: element.key,
+          // must add this so we can delete the item, but also be able to show the id
           amount: element.value['amount'],
           dateTime: DateTime.parse(element.value['dateTime']),
           unit: element.value['unit'],
