@@ -44,18 +44,12 @@ class WaterSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String sunday = convertDateTimeToString(startofWeek.add(Duration(days: 0)));
-    String monday =
-        convertDateTimeToString(startofWeek.add(const Duration(days: 1)));
-    String tuesday =
-        convertDateTimeToString(startofWeek.add(const Duration(days: 2)));
-    String wednesday =
-        convertDateTimeToString(startofWeek.add(const Duration(days: 3)));
-    String thursday =
-        convertDateTimeToString(startofWeek.add(const Duration(days: 4)));
-    String friday =
-        convertDateTimeToString(startofWeek.add(const Duration(days: 5)));
-    String saturday =
-        convertDateTimeToString(startofWeek.add(const Duration(days: 6)));
+    String monday = convertDateTimeToString(startofWeek.add(const Duration(days: 1)));
+    String tuesday =  convertDateTimeToString(startofWeek.add(const Duration(days: 2)));
+    String wednesday = convertDateTimeToString(startofWeek.add(const Duration(days: 3)));
+    String thursday = convertDateTimeToString(startofWeek.add(const Duration(days: 4)));
+    String friday = convertDateTimeToString(startofWeek.add(const Duration(days: 5)));
+    String saturday = convertDateTimeToString(startofWeek.add(const Duration(days: 6)));
 
     return Consumer<WaterData>(
       builder: (context, value, child) => SizedBox(

@@ -12,8 +12,8 @@ class BarGraph extends StatelessWidget {
   final double friWaterAmt;
   final double satWaterAmt;
 
-  const BarGraph(
-      {super.key,
+  const BarGraph({
+      super.key,
       required this.maxY,
       required this.sunWaterAmt,
       required this.monWaterAmt,
@@ -21,7 +21,8 @@ class BarGraph extends StatelessWidget {
       required this.wedWaterAmt,
       required this.thurWaterAmt,
       required this.friWaterAmt,
-      required this.satWaterAmt});
+      required this.satWaterAmt
+      });
 
   @override
   Widget build(BuildContext context) {
