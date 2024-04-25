@@ -4,6 +4,7 @@ import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/model/water_model.dart';
 
 class WaterTile extends StatelessWidget {
+
   const WaterTile({
     super.key,
     required this.waterModel,
@@ -23,14 +24,12 @@ class WaterTile extends StatelessWidget {
               size: 20,
               color: Colors.blue,
             ),
-            Text(
-              '${waterModel.amount.toStringAsFixed(2)} ml',
+            Text('${waterModel.amount.toStringAsFixed(2)} ml',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ),
-        subtitle:
-            Text('${waterModel.dateTime.day}/${waterModel.dateTime.month}'),
+        subtitle: Text('${waterModel.dateTime.day}/${waterModel.dateTime.month}'),
         trailing: IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () {

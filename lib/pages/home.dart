@@ -115,15 +115,15 @@ class _HomePageState extends State<HomePage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Weekly: ',
+              Text('Weekly: ',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Text('${value.calculateWeeklyWaterIntake(value)} ml',
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
-                      .copyWith(fontWeight: FontWeight.bold)),
+                      .copyWith(fontWeight: FontWeight.bold)
+              ),
             ],
           ),
         ),
