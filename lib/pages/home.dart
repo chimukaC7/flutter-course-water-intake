@@ -18,8 +18,10 @@ class _HomePageState extends State<HomePage> {
 
   // final amountController = TextEditingController(text: "hello");
   final amountController = TextEditingController();
-
   bool _isLoading = true;
+
+
+
   @override
   void initState() {
     _loadData();
@@ -132,7 +134,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: addWater, child: const Icon(Icons.add)),
         body: ListView(
           children: [
-            WaterSummary(startofWeek: value.getStartOfWeek()),
+            WaterSummary(startofWeek: value.getStartOfWeek()),//chat part
             !_isLoading
                 ? ListView.builder(
                     shrinkWrap: true,
